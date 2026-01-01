@@ -1,0 +1,86 @@
+:root {
+  /* Primary Browns */
+  --coffee-brown: #4B2E2E;      /* hero background */
+  --dark-chocolate: #3E2723;    /* footer, headers */
+  --espresso: #5D4037;           /* cards or sections */
+
+  /* Accent Browns */
+  --caramel: #A0522D;            /* buttons, highlights */
+  --cinnamon: #D2691E;           /* hover states */
+  --tan: #D2B48C;                 /* card backgrounds */
+
+  /* Neutral/Light Browns */
+  --beige: #F5F5DC;              /* text or light backgrounds */
+  --sand: #C2B280;               /* secondary backgrounds */
+}
+.feedback {
+  width: 100%;
+  height: 90vh;
+  
+}
+.feedback h1{
+  border-bottom: 2px solid var(--caramel);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  padding: 30px;
+}
+
+form input {
+  height: 40px;
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid var(--caramel);
+  color: var(--espresso);
+}
+
+form textarea {
+  margin-top: 15px;
+  height: 70px;
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid var(--caramel);
+  color: var(--espresso);
+}
+input::placeholder,
+textarea::placeholder {
+  font-weight: bold;
+  color: var(--dark-chocolate);
+  font-family: Arial, Helvetica, sans-serif;
+}
+form input:focus,
+textarea:focus {
+  outline: none;
+}
+
+form label {
+  margin-top: 15px;
+  color: grey;
+}
+
+form button {
+  margin-top: 40px;
+  width: 140px;
+  height: 40px;
+  border: none;
+  background-color: var(--dark-chocolate);
+  color: whitesmoke;
+  font-size: 15px;
+  cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+  form {
+    width: 80%;
+    padding: 10px;
+  }
+
+  form input,
+  form textarea {
+    width: 80%;
+  }
+  
+}

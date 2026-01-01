@@ -1,0 +1,77 @@
+const express = require('express'); 
+const mysql = require('mysql');
+const cors = require('cors');
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use('/images', express.static(__dirname + '/public/images'));
+app.get('/', (req, res) => {
+  return  res.json("Backend is running");
+});
+
+const db = mysql.createConnection({
+    host: "caboose.proxy.rlwy.net",
+    user: "root",
+    password: "jGcPvHbNNrrZrzqWuUMRhTlcXpHeYvLI",
+    database:"railwaydatabase",
+  })  ;
+
+db.connect((err) => {
+  if (err) {
+    console.log("Database connection error:", err);
+  } else {
+    console.log("Connected to MySQL database!");
+  }
+});
+
+app.get('/categories', (req, res) => {
+  const sql = "SELECT * FROM categories";
+  db.query(sql, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+// create API to get one single student record 
+  app.get('/categories/onerecord/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = "SELECT * FROM categories WHERE ID = ?";
+    
+    db.query(sql, [id], (err, data) => {
+      if (err) return res.status(500).json(err);
+      if (data.length === 0) return res.status(404).json({ message: "Record not found" });
+      res.json(data[0]);
+    });
+  });
+
+app.get('/menu_items', (req, res) => {
+  const sql = ` SELECT m.id, m.name, m.ingredients, m.price, m.image, m.category_id, c.name AS category_name
+    FROM menu_items m
+    INNER JOIN categories c ON m.category_id = c.id`;
+  db.query(sql, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
+
+app.post("/feedback",  (req, res) => {
+   const name = req.body.name;
+    const email = req.body.email;
+    const message = req.body.message;
+    const q = "INSERT INTO feedback(`name`, `email`, `message`) VALUES (?,?,?)";
+    db.query(q, [name,email,message], (err, data) => {
+    if (err) return res.send(err);
+    return res.json(data);
+  });
+});
+
+
+
+app.listen(8083, () => {
+  console.log("Connected to thebackend.");
+});
+
+
+
+console.log("Before listen");

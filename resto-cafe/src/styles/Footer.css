@@ -1,0 +1,60 @@
+:root {
+  /* Primary Browns */
+  --coffee-brown: #4B2E2E;      
+  --dark-chocolate: #3E2723;    
+  --espresso: #5D4037;           
+
+
+  /* Accent Browns */
+  --caramel: #A0522D;            
+  --cinnamon: #D2691E;           
+  --tan: #D2B48C;                 
+
+  /* Neutral/Light Browns */
+  --beige: #F5F5DC;              
+  --sand: #C2B280;               
+}
+
+.footer {
+  width: 100%;
+  height: 200px;
+  background-color: var(--dark-chocolate);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 10px;
+  
+}
+
+.socialMedia svg {
+  color: var(--beige);
+  margin: 20px;
+  font-size: 70px;
+  cursor: pointer;
+}
+
+.footer p {
+  color: var(--beige);
+}
+@media screen and (max-width: 768px) {
+  .socialMedia svg {
+    font-size: 50px;
+    margin: 10px;
+  }
+  
+}
+@media screen and (max-width: 480px) {
+  .socialMedia svg {
+    font-size: 40px;
+    margin: 8px;
+  }
+  
+}
+@media screen and (max-width: 360px) {
+  .socialMedia svg {
+    font-size: 30px;
+    margin: 5px;
+  }
+  
+}

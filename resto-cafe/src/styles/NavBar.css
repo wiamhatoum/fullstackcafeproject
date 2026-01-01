@@ -1,0 +1,79 @@
+:root {
+  /* Primary Browns */
+  --coffee-brown: #4B2E2E;      
+  --dark-chocolate: #3E2723;   
+  --espresso: #5D4037;          
+
+  /* Accent Browns */
+  --caramel: #A0522D;            
+  --cinnamon: #D2691E;           
+  --tan: #D2B48C;                 
+
+  /* Neutral/Light Browns */
+  --beige: #F5F5DC;              
+  --sand: #C2B280;               
+}
+
+.navbar {
+  background-color: var(--dark-chocolate);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  position: sticky; 
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+
+.navbar a {
+  color: var(--beige);
+  text-decoration: none;
+  margin: 0 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.navbar a:hover {
+  color: var(--cinnamon); 
+  transform: scale(1.05);
+}
+
+.navbar .active {
+  color: var(--caramel); 
+  font-weight: bold;
+  border-bottom: 2px solid var(--caramel);
+  padding-bottom: 0.2rem;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+  .navbar a {
+    width: 70px;
+    margin: 0 0.5rem;
+    font-size: 0.9rem;
+  }
+ 
+}
+
+@media only screen and (max-width: 480px) {
+  .navbar a {
+    width: 50px;
+    margin: 0 0.3rem;
+    font-size: 0.8rem;
+    
+  }
+
+}
+@media only screen and (max-width: 360px) {
+  .navbar a {
+    width: 40px;
+    margin: 0 0.2rem;
+    font-size: 0.7rem;
+    
+  }
+
+}
