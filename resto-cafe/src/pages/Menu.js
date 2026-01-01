@@ -9,7 +9,7 @@ function Menu() {
   useEffect(() => {
     const fetchAllMenuItems = async () => {
       try {
-        const res = await axios.get("http://localhost:8083/menu_items");
+        const res = await axios.get("https://node-mysql-restocafe.onrender.com/menu_items");
         setMenuItems(res.data);
       } catch (err) {
         console.log(err);
