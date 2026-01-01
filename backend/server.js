@@ -11,10 +11,11 @@ app.get('/', (req, res) => {
 });
 
 const db = mysql.createConnection({
-    host: "caboose.proxy.rlwy.net",
-    user: "root",
-    password: "jGcPvHbNNrrZrzqWuUMRhTlcXpHeYvLI",
-    database:"railwaydatabase",
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT
   })  ;
 
 db.connect((err) => {
