@@ -19,11 +19,12 @@ const db = mysql.createPool({
     port: process.env.DB_PORT
   })  ;
 
-db.connect((err) => {
+db.getConnection((err, connection) => {
   if (err) {
-    console.log("Database connection error:", err);
+    console.error("Database connection failed:", err);
   } else {
     console.log("Connected to MySQL database!");
+    connection.release(); // release connection back to the pool
   }
 });
 app.get('/test-db', (req, res) => {
