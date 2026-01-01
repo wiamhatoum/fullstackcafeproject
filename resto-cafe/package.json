@@ -5,10 +5,10 @@
   "version": "0.1.0",
   
   "private": true,
-
+  
   "homepage": "https://wiamhatoum.github.io/fullstackcafeproject",
+  
   "dependencies": {
-
   
     
   "@emotion/react": "^11.14.0",
@@ -61,11 +61,14 @@
   
     
   "build": "react-scripts build",
-
+  
+    
   "predeploy": "npm run build",
   
+    
   "deploy": "gh-pages -d build",
-
+  
+    
   "test": "react-scripts test",
   
     
