@@ -34,7 +34,7 @@ function Feedback() {
     
     
     try {
-       await axios.post(`https://node-mysql-restocafe.onrender.com/feedback`, state);
+       await axios.post(`https://resto-backend-qfub.onrender.com/feedback`, state);
        alert(" Your feedback was submitted successfully");
        setState({ name: "", email: "", message: "" });
     } catch (err) {

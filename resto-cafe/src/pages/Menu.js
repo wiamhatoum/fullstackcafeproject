@@ -9,7 +9,7 @@ function Menu() {
   useEffect(() => {
     const fetchAllMenuItems = async () => {
       try {
-        const res = await axios.get("https://node-mysql-restocafe.onrender.com/menu_items");
+        const res = await axios.get("https://resto-backend-qfub.onrender.com/menu_items");
         setMenuItems(res.data);
       } catch (err) {
         console.log(err);
@@ -36,7 +36,7 @@ function Menu() {
         {menu_items.filter(item => item.category_name === category).map(item => (
           <MenuItem
             key={item.id}
-            image={item.image}
+            image={`https://resto-backend-qfub.onrender.com/images/${item.image}`}
             name={item.name}
             ingredients={item.ingredients}
             price={item.price}
