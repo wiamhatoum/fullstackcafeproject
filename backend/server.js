@@ -26,9 +26,14 @@ db.connect((err) => {
 });
 
 app.get('/categories', (req, res) => {
+  console.log("GET / categories hit");
   const sql = "SELECT * FROM categories";
   db.query(sql, (err, data) => {
-    if (err) return res.json(err);
+    if (err){
+      console.log("db error:", err)
+       return res.json(err);
+    }
+    console.log("db data returned:", data)
     return res.json(data);
   });
 });
@@ -68,8 +73,9 @@ app.post("/feedback",  (req, res) => {
 
 
 
-app.listen(8083, () => {
-  console.log("Connected to thebackend.");
+const PORT = process.env.PORT || 8083;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
 
