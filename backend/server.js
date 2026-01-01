@@ -9,6 +9,8 @@ app.use('/images', express.static(__dirname + '/public/images'));
 app.get('/', (req, res) => {
   return  res.json("Backend is running");
 });
+const mysql = require('mysql');
+const dbConfig = new URL(process.env.MYSQL_PUBLIC_URL);
 
 const db = mysql.createPool({
     connectionLimit : 10,
@@ -16,6 +18,7 @@ const db = mysql.createPool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
+    database: dbConfig.pathname.replace('/', ''),
     port: process.env.DB_PORT
   })  ;
 
