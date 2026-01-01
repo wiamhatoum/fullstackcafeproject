@@ -25,6 +25,12 @@ db.connect((err) => {
     console.log("Connected to MySQL database!");
   }
 });
+app.get('/test-db', (req, res) => {
+  db.query('SELECT 1 + 1 AS result', (err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    res.json({ success: true, data });
+  });
+});
 
 app.get('/categories', (req, res) => {
   console.log("GET / categories hit");
