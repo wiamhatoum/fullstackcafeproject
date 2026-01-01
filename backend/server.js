@@ -1,35 +1,38 @@
-const express = require('express'); 
+const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use('/images', express.static(__dirname + '/public/images'));
-app.get('/', (req, res) => {
-  return  res.json("Backend is running");
-});
-const mysql = require('mysql');
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
+
+app.get('/', (req, res) => res.json("Backend is running"));
+
+// Parse Railway public URL
 const dbConfig = new URL(process.env.MYSQL_PUBLIC_URL);
 
 const db = mysql.createPool({
-    connectionLimit : 10,
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    database: dbConfig.pathname.replace('/', ''),
-    port: process.env.DB_PORT
-  })  ;
+  connectionLimit: 10,
+  host: dbConfig.hostname,
+  user: dbConfig.username,
+  password: dbConfig.password,
+  database: dbConfig.pathname.replace('/', ''),
+  port: dbConfig.port
+});
 
+// Test DB connection
 db.getConnection((err, connection) => {
   if (err) {
     console.error("Database connection failed:", err);
   } else {
     console.log("Connected to MySQL database!");
-    connection.release(); // release connection back to the pool
+    connection.release();
   }
 });
+
+// Test route
 app.get('/test-db', (req, res) => {
   db.query('SELECT 1 + 1 AS result', (err, data) => {
     if (err) return res.json({ success: false, error: err });
@@ -37,59 +40,46 @@ app.get('/test-db', (req, res) => {
   });
 });
 
+// Categories
 app.get('/categories', (req, res) => {
-  console.log("GET / categories hit");
-  const sql = "SELECT * FROM categories";
-  db.query(sql, (err, data) => {
-    if (err){
-      console.log("db error:", err)
-       return res.json(err);
-    }
-    console.log("db data returned:", data)
-    return res.json(data);
+  db.query('SELECT * FROM categories', (err, data) => {
+    if (err) return res.json(err);
+    res.json(data);
   });
 });
-// create API to get one single student record 
-  app.get('/categories/onerecord/:id', (req, res) => {
-    const id = req.params.id;
-    const sql = "SELECT * FROM categories WHERE ID = ?";
-    
-    db.query(sql, [id], (err, data) => {
-      if (err) return res.status(500).json(err);
-      if (data.length === 0) return res.status(404).json({ message: "Record not found" });
-      res.json(data[0]);
-    });
-  });
 
+// Single category
+app.get('/categories/onerecord/:id', (req, res) => {
+  const id = req.params.id;
+  db.query('SELECT * FROM categories WHERE ID = ?', [id], (err, data) => {
+    if (err) return res.status(500).json(err);
+    if (data.length === 0) return res.status(404).json({ message: "Record not found" });
+    res.json(data[0]);
+  });
+});
+
+// Menu items
 app.get('/menu_items', (req, res) => {
-  const sql = ` SELECT m.id, m.name, m.ingredients, m.price, m.image, m.category_id, c.name AS category_name
+  const sql = `
+    SELECT m.id, m.name, m.ingredients, m.price, m.image, m.category_id, c.name AS category_name
     FROM menu_items m
-    INNER JOIN categories c ON m.category_id = c.id`;
+    INNER JOIN categories c ON m.category_id = c.id
+  `;
   db.query(sql, (err, data) => {
     if (err) return res.json(err);
-    return res.json(data);
+    res.json(data);
   });
 });
 
-
-app.post("/feedback",  (req, res) => {
-   const name = req.body.name;
-    const email = req.body.email;
-    const message = req.body.message;
-    const q = "INSERT INTO feedback(`name`, `email`, `message`) VALUES (?,?,?)";
-    db.query(q, [name,email,message], (err, data) => {
+// Feedback
+app.post("/feedback", (req, res) => {
+  const { name, email, message } = req.body;
+  const q = "INSERT INTO feedback(`name`,`email`,`message`) VALUES (?,?,?)";
+  db.query(q, [name, email, message], (err, data) => {
     if (err) return res.send(err);
-    return res.json(data);
+    res.json(data);
   });
 });
-
-
 
 const PORT = process.env.PORT || 8083;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-
-
-
-console.log("Before listen");
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
