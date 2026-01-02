@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/fullstackcafeproject/static/css/main.856e66ac.css",
-    "main.js": "/fullstackcafeproject/static/js/main.6ccdc23c.js",
+    "main.js": "/fullstackcafeproject/static/js/main.5f5ae5ff.js",
     "static/js/453.a15b74cd.chunk.js": "/fullstackcafeproject/static/js/453.a15b74cd.chunk.js",
     "static/media/restocafeimg.jpg": "/fullstackcafeproject/static/media/restocafeimg.e2eb9418213782dfa4ec.jpg",
     "static/media/logo.svg": "/fullstackcafeproject/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/fullstackcafeproject/index.html",
     "main.856e66ac.css.map": "/fullstackcafeproject/static/css/main.856e66ac.css.map",
-    "main.6ccdc23c.js.map": "/fullstackcafeproject/static/js/main.6ccdc23c.js.map",
+    "main.5f5ae5ff.js.map": "/fullstackcafeproject/static/js/main.5f5ae5ff.js.map",
     "453.a15b74cd.chunk.js.map": "/fullstackcafeproject/static/js/453.a15b74cd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.856e66ac.css",
-    "static/js/main.6ccdc23c.js"
+    "static/js/main.5f5ae5ff.js"
   ]
 }
