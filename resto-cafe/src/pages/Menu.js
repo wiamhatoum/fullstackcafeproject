@@ -36,7 +36,7 @@ function Menu() {
         {menu_items.filter(item => item.category_name === category).map(item => (
           <MenuItem
             key={item.id}
-            image={`https://resto-backend-qfub.onrender.com/images/${item.image}`}
+            image={item.image}
             name={item.name}
             ingredients={item.ingredients}
             price={item.price}
