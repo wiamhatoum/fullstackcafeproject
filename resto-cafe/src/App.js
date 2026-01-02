@@ -10,8 +10,18 @@ import Home from './pages/Home';
 import Footer from './components/Footer';
 import Feedback from './pages/feedback';
 import { Routes , Route } from 'react-router-dom'; 
+import { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+    const backendUrl = "https://resto-backend-qfub.onrender.com";
+    fetch(backendUrl).then(()=>{
+      console.log("Backend wake request sent");
+    })
+    .catch((err)=>{
+      console.error("Error waking up backend:", err);
+    });
+  }, []);
   return (
     
      
